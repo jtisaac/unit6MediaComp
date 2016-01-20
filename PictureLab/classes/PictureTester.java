@@ -33,6 +33,13 @@ public class PictureTester
     caterpillar.mirrorHorizontal();
     caterpillar.explore();
   }
+  public static void testCC()
+  {
+    Picture caterpillar = new Picture("caterpillar.jpg");
+    Picture blank = new Picture(2000,1000);
+    caterpillar.cropAndCopy(caterpillar,50,100,0,50,50,50);
+    caterpillar.explore();
+  }
   /** Method to test mirrorHorizontalToTop */
   public static void testMirrorHorizontalBotToTop()
   {
@@ -87,19 +94,20 @@ public class PictureTester
     // and comment out the ones you don't want
     // to run
     
-    testZeroBlue();
+    //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    testMirrorVertical();
-    testMirrorHorizontal();
-    testMirrorHorizontalBotToTop();
-    testMirrorTemple();
-    testMirrorArms();
-    testMirrorGull();
+    //testMirrorVertical();
+    //testMirrorHorizontal();
+    //testMirrorHorizontalBotToTop();
+    //testMirrorTemple();
+    //testMirrorArms();
+    //testMirrorGull();
+    testCC();
     //testMirrorDiagonal();
     //testCollage();
     //testCopy();

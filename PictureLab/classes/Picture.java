@@ -352,18 +352,19 @@ public class Picture extends SimplePicture
     {
         Pixel [] [] forpixels = sourcePicture.getPixels2D();
         Pixel [] [] topixels = this.getPixels2D();
-        
         int currcoldif = 0;
         int currrowdif = 0;
-        for (int i = 0; i < endSourceRow - startSourceRow; i++)
+        for (int i = startSourceRow; i < endSourceRow; i++)
         {
-            for (int j = 0; j < endSourceCol - startSourceCol; j++)
+            currcoldif = 0;
+            for (int j = startSourceCol; j < endSourceCol; j++)
             {
-                topixels [startDestRow + currrowdif][startDestCol + currcoldif] = forpixels [i] [j];
-                System.out.println("ksdhfkjdsfhids");
+                topixels [startDestRow + currrowdif][startDestCol + currcoldif].setColor(forpixels [i] [j].getColor());
+                
                 currcoldif ++;
             }
             currrowdif ++;
         }
+        
     }
 } // this } is the end of class Picture, put all new methods before this
