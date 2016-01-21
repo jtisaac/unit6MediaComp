@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.text.*;
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
-
+import java.awt.Color;
 /**
  * A class that represents a picture.  This class inherits from 
  * SimplePicture and allows the student to add functionality to
@@ -261,6 +261,7 @@ public class Picture extends SimplePicture
 
         }
     }
+
     public void mirrorHorizontal()
     {
         Pixel[][] pixels = this.getPixels2D();
@@ -269,16 +270,17 @@ public class Picture extends SimplePicture
         {
             for (int row = 0; row < pixlength; row++)
             {
-                 int distfrommid = pixlength - row;
-                 
-                 Pixel topPixel = pixels[row][col];
-                 Pixel botPixel = pixels[pixlength + distfrommid - 1][col];
-                 botPixel.setColor(topPixel.getColor());
+                int distfrommid = pixlength - row;
+
+                Pixel topPixel = pixels[row][col];
+                Pixel botPixel = pixels[pixlength + distfrommid - 1][col];
+                botPixel.setColor(topPixel.getColor());
             }
         }
-        
+
     }
-     public void mirrorHorizontalBotToTop()
+
+    public void mirrorHorizontalBotToTop()
     {
         Pixel[][] pixels = this.getPixels2D();
         int pixlength = pixels.length/2;
@@ -286,18 +288,19 @@ public class Picture extends SimplePicture
         {
             for (int row = pixlength; row < pixels.length; row++)
             {
-                 int distfrommid = row - pixlength;
-                 
-                 Pixel botPixel = pixels[row][col];
-                 Pixel topPixel = pixels[pixlength + distfrommid - 1][col];
-                 topPixel.setColor(botPixel.getColor());
+                int distfrommid = row - pixlength;
+
+                Pixel botPixel = pixels[row][col];
+                Pixel topPixel = pixels[pixlength + distfrommid - 1][col];
+                topPixel.setColor(botPixel.getColor());
             }
         }
-        
+
     }
+
     public void mirrorArms()
     {
-         int mirrorPoint = 200;
+        int mirrorPoint = 200;
         Pixel leftPixel = null;
         Pixel rightPixel = null;
         int count = 0;
@@ -319,7 +322,8 @@ public class Picture extends SimplePicture
         }
         System.out.println(count);
     }
-     public void mirrorGull()
+
+    public void mirrorGull()
     {
         Pixel[][] pixels = this.getPixels2D();
         int mirrorPoint = 235;
@@ -327,15 +331,13 @@ public class Picture extends SimplePicture
         Pixel rightPixel = null;
         int count = 0;
         int amount = 0;
-        
 
         // loop through the rows
         for (int row = 0; row < pixels.length; row++)
         {
-            
+
             for (int col = 0; col < mirrorPoint; col++)
             {
-                
 
                 leftPixel = pixels[row][col];
                 amount = mirrorPoint - 1 - col;
@@ -346,10 +348,11 @@ public class Picture extends SimplePicture
             }
         }
         System.out.println(count);
-        
+
     }
+
     public void cropAndCopy(Picture sourcePicture, int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,
-         int startDestRow, int startDestCol)
+    int startDestRow, int startDestCol)
     {
         Pixel [] [] forpixels = sourcePicture.getPixels2D();
         Pixel [] [] topixels = this.getPixels2D();
@@ -361,25 +364,56 @@ public class Picture extends SimplePicture
             for (int j = startSourceCol; j < endSourceCol; j++)
             {
                 topixels [startDestRow + currrowdif][startDestCol + currcoldif].setColor(forpixels [i] [j].getColor());
-                
+
                 currcoldif ++;
             }
             currrowdif ++;
         }
-        
+
     }
+
+    public void tint(String color)
+    {
+        Pixel [] [] temp = this.getPixels2D();
+        for (Pixel []  pixelrow : temp)
+        {
+            for (Pixel pixel : pixelrow)
+            {
+                if (color.equals("red"))
+                {
+                    pixel.setRed(pixel.getRed()+40);
+                    
+                }
+                else if (color.equals("blue"))
+                {
+                    pixel.setBlue(pixel.getBlue()+40);
+                }
+                else if (color.equals("green"))
+                {
+                    pixel.setGreen(pixel.getGreen()+40);
+                }
+            }
+        }
+    }
+
     public void makeCollage(Picture sourcePicture)
     {
-       Pixel [] [] origimg = sourcePicture.getPixels2D();
-       Pixel [] [] background = this.getPixels2D();
-       this.cropAndCopy(sourcePicture, 0, sourcePicture.getHeight(), 0, sourcePicture.getWidth(),0,0);  
-       
-       
-       Picture temp = new Picture(sourcePicture.getHeight(),sourcePicture.getWidth());
-       temp.copyPicture(sourcePicture);
-       temp.mirrorHorizontal();
-       this.cropAndCopy(temp, 0,sourcePicture.getHeight(),0,sourcePicture.getWidth(),0,sourcePicture.getWidth());
-       
-       
+        Pixel [] [] origimg = sourcePicture.getPixels2D();
+        Pixel [] [] background = this.getPixels2D();
+        this.cropAndCopy(sourcePicture, 0, sourcePicture.getHeight(), 0, sourcePicture.getWidth(),0,0);  
+
+        Picture temp = new Picture(sourcePicture.getHeight(),sourcePicture.getWidth());
+        temp.copyPicture(sourcePicture);
+        temp.mirrorHorizontal();
+        this.cropAndCopy(temp, 0,sourcePicture.getHeight(),0,sourcePicture.getWidth(),0,sourcePicture.getWidth());
+
+        
+        temp.copyPicture(sourcePicture);
+        temp.tint("blue");
+        this.cropAndCopy(temp, 0,sourcePicture.getHeight(),0,sourcePicture.getWidth(),sourcePicture.getHeight(),0);
+        
+        temp.copyPicture(sourcePicture);
+        temp.tint("green");
+        this.cropAndCopy(temp, 0,sourcePicture.getHeight(),0,sourcePicture.getWidth(),sourcePicture.getHeight(),sourcePicture.getWidth());
     }
 } // this } is the end of class Picture, put all new methods before this
