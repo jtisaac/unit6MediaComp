@@ -335,6 +335,7 @@ public class Picture extends SimplePicture
             
             for (int col = 0; col < mirrorPoint; col++)
             {
+                
 
                 leftPixel = pixels[row][col];
                 amount = mirrorPoint - 1 - col;
@@ -366,5 +367,19 @@ public class Picture extends SimplePicture
             currrowdif ++;
         }
         
+    }
+    public void makeCollage(Picture sourcePicture)
+    {
+       Pixel [] [] origimg = sourcePicture.getPixels2D();
+       Pixel [] [] background = this.getPixels2D();
+       this.cropAndCopy(sourcePicture, 0, sourcePicture.getHeight(), 0, sourcePicture.getWidth(),0,0);  
+       
+       
+       Picture temp = new Picture(sourcePicture.getHeight(),sourcePicture.getWidth());
+       temp.copyPicture(sourcePicture);
+       temp.mirrorHorizontal();
+       this.cropAndCopy(temp, 0,sourcePicture.getHeight(),0,sourcePicture.getWidth(),0,sourcePicture.getWidth());
+       
+       
     }
 } // this } is the end of class Picture, put all new methods before this

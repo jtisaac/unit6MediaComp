@@ -86,6 +86,14 @@ public class PictureTester
     gull.mirrorGull();
     gull.explore();
   }
+  public static void testmakeCollage()
+  {
+    Picture canvas = new Picture(1000, 2000);  
+    Picture swan = new Picture("Swan.jpg");
+    canvas.makeCollage(swan);
+    canvas.explore();
+    
+  }
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -107,7 +115,7 @@ public class PictureTester
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
-    testCC();
+    //testCC();
     //testMirrorDiagonal();
     //testCollage();
     //testCopy();
@@ -119,5 +127,6 @@ public class PictureTester
     //testSetRedToHalfValueInTopHalf();
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
+    testmakeCollage();
   }
 }
