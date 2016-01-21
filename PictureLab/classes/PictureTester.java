@@ -92,7 +92,7 @@ public class PictureTester
     Picture swan = new Picture("Swan.jpg");
     canvas.makeCollage(swan);
     canvas.explore();
-    
+    canvas.write("CollageLab");
   }
   /** Main method for testing.  Every class can have a main
     * method in Java */
