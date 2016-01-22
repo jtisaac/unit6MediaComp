@@ -395,18 +395,15 @@ public class Picture extends SimplePicture
             }
         }
     }
-
+    //this is the official method for the collage lab
     public void makeCollage(Picture sourcePicture)
     {
-        Pixel [] [] origimg = sourcePicture.getPixels2D();
-        Pixel [] [] background = this.getPixels2D();
         this.cropAndCopy(sourcePicture, 0, sourcePicture.getHeight(), 0, sourcePicture.getWidth(),0,0);  
 
         Picture temp = new Picture(sourcePicture.getHeight(),sourcePicture.getWidth());
         temp.copyPicture(sourcePicture);
         temp.mirrorHorizontal();
         this.cropAndCopy(temp, 0,sourcePicture.getHeight(),0,sourcePicture.getWidth(),0,sourcePicture.getWidth());
-
         
         temp.copyPicture(sourcePicture);
         temp.tint("blue");

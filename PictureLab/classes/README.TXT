@@ -1,0 +1,1 @@
+Run main in the Picture Test to run the collage lab.
